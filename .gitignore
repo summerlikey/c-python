@@ -1,0 +1,7 @@
+build
+.vscode
+cmake-build-debug
+veh.kdev4
+.kdev4
+.idea
+work

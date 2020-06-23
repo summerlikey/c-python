@@ -1,15 +1,26 @@
 # c++调用Python3.6
 
+## TODO
+
+1. 如何使用
+
 ## 方式
 
 c++调用python有两种方式
 
 1. 调用python模块
+
+   见usePythonScript文件夹
+
 2. 纯嵌入
+
+   见useEmbed文件夹
+
 3. 
 
 ## 总结
 
+```
 所有Python元素，module、function、tuple、string等等，实际上都是PyObject。C语言里操纵它们，一律使用PyObject *。
 
 Python的类型与C语言类型可以相互转换。Python类型XXX转换为C语言类型YYY要使用PyXXX_AsYYY函数；C类型YYY转换为Python类型XXX要使用PyXXX_FromYYY函数。
@@ -22,6 +33,9 @@ Python的类型与C语言类型可以相互转换。Python类型XXX转换为C语
 链接：https://www.zhihu.com/question/23003213/answer/56121859
 来源：知乎
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
+
+
 
 ## 问题
 1. python2和python的PyString_FromString()函数不相同

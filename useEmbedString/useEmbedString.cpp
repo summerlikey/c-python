@@ -10,16 +10,15 @@ int main(int argc, char *argv[])
     int res = 0;
     Py_Initialize();
     // 将Python工作路径切换到待调用模块所在目录，一定要保证路径名的正确性
-    // 2、初始化python系统文件路径，保证可以访问到 .py文件
-    // path = "'./'"，当前文件夹
-    string py_file_path = "'/home/ganggang/Documents/cpppython-test/useEmbed'";
+    // 2、初始化python系统文件路径，保证可以访问到 py文件
+    string path = "'/home/ganggang/Documents/cpppython-test/useEmbedString'";
     string python_file_path = "sys.path.append(";
-    python_file_path = python_file_path + py_file_path + ")" ;
+    python_file_path = python_file_path + path + ")" ;
     const char* c_python_file_path = python_file_path.c_str();
     PyRun_SimpleString("import sys");
     PyRun_SimpleString(c_python_file_path);
     //调用python
-    res = great_function_from_python(1995);
+    res = great_function_from_python(195);
     //销毁解释器
     Py_Finalize();
     cout<<res<<endl;

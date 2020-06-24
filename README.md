@@ -16,6 +16,12 @@ c++调用python有两种方式
 
    见useEmbed文件夹
 
+   ```c++
+   //https://docs.python.org/zh-cn/3.6/extending/embedding.html
+   ```
+
+   
+
 3. 
 
 ## 总结

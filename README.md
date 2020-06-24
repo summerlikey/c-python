@@ -1,4 +1,4 @@
-# c++调用Python3.6
+c++调用Python3.6
 
 ## TODO
 
@@ -16,13 +16,13 @@ c++调用python有两种方式
 
    见useEmbed文件夹
 
-   ```c++
-   //https://docs.python.org/zh-cn/3.6/extending/embedding.html
+3. 官方文档
+
+   ```html
+   https://docs.python.org/zh-cn/3.6/extending/embedding.html
    ```
 
-   
-
-3. 
+4. 
 
 ## 总结
 
@@ -39,6 +39,39 @@ Python的类型与C语言类型可以相互转换。Python类型XXX转换为C语
 链接：https://www.zhihu.com/question/23003213/answer/56121859
 来源：知乎
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
+
+## 数据转换
+
+c++向python传递参数(3.6可用)
+
+```c++
+PyObject* args = PyTuple_New(3);
+PyObject* arg1 = Py_BuildValue("i", 100); // 整数参数
+PyObject* arg2 = Py_BuildValue("f", 3.14); // 浮点数参数
+PyObject* arg3 = Py_BuildValue("s", "hello"); // 字符串参数
+PyTuple_SetItem(args, 0, arg1);
+PyTuple_SetItem(args, 1, arg2);
+PyTuple_SetItem(args, 2, arg3);
+```
+
+python转c++
+
+```c++
+ PyInt_AsLong();//整数
+ PyFloat_AsDouble();//浮点
+ PyString_AsString();//字符串,PyUnicode_AsUTF8(pValue)
+ PyUnicode_AsUTF8(pValue);//python转出c++的字符串
+
+//还可以使用 PyArg_ParseTuple 函数来将返回值作为元组解析。
+//PyArg_Parse 也是一个使用很方便的转换函数。
+//PyArg_ParseTuple 和 PyArg_Parse 都使用 格式字符串
+```
+
+c++转python
+
+```c++
+ PyLong_FromLong();						//整数
 ```
 
 
@@ -78,3 +111,6 @@ Python的类型与C语言类型可以相互转换。Python类型XXX转换为C语
 
 3. s
 
+## 代码
+
+useEmbedString传入字符串

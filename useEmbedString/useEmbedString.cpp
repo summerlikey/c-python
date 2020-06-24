@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 //封装python函数
-int great_function_from_python(int a);
+int great_function_from_python(const char * str);
 
 int main(int argc, char *argv[])
 {
@@ -18,23 +18,25 @@ int main(int argc, char *argv[])
     PyRun_SimpleString("import sys");
     PyRun_SimpleString(c_python_file_path);
     //调用python
-    res = great_function_from_python(195);
+    //传入字符串
+    char const * c_str = "ganggang";
+    res = great_function_from_python(c_str);
     //销毁解释器
     Py_Finalize();
     cout<<res<<endl;
     return 0;
 }
 
-int great_function_from_python(int a){
+int great_function_from_python(const char * str){
     //封装python函数
     int res = 0;
 	PyObject *pName,*pModule,*pFunc;
 	PyObject *pArgs,*pValue;
 	/*  import  */
 	//模块名
-	const char *pModuleName = "great_module";
+	const char *pModuleName = "test_string";
 	//函数名
-    const char *pFunction = "great_function";
+    const char *pFunction = "test_string";
     pName = PyUnicode_DecodeFSDefault(pModuleName);
 	pModule = PyImport_Import(pName);
 	//释放指针
@@ -49,13 +51,14 @@ int great_function_from_python(int a){
             //传入参数，有几个参数写几个
             pArgs = PyTuple_New(1);
             //传入参数，将其传入pArgs中
-            PyTuple_SetItem(pArgs,0,PyLong_FromLong(a));
+            PyTuple_SetItem(pArgs,0,Py_BuildValue("s",str));
             /*  call回调  */
             pValue = PyObject_CallObject(pFunc,pArgs);
             Py_DECREF(pArgs);
             if (pValue != NULL) {
-                printf("Result of call: %ld\n", PyLong_AsLong(pValue));
-                return PyLong_AsLong(pValue);
+                printf("Result of call: %s\n", PyUnicode_AsUTF8(pValue));
+                //return PyLong_AsLong(pValue);
+                return 0;
                 Py_DECREF(pValue);
             }
             else {

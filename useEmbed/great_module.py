@@ -11,4 +11,4 @@ def test_string(str):
     s = 'The value of str is ' + str
     print(s)
     a = 11
-    return a
+    return s
